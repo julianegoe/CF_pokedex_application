@@ -7,9 +7,9 @@ let pokemonList = [{name: "Bulbasaur", height: 0.7, weight: 6.9, types: ["grass"
 for (let i = 0; i< pokemonList.length; i++) {
     console.log(pokemonList[i]["name"]);
     if (pokemonList[i]["height"] < 1) {
-      document.write(`<div class="grid__item">${pokemonList[i]["name"]} (height: ${pokemonList[i]["height"]}m) </div>`);
+      document.write(`<div class="pokemon-grid__item">${pokemonList[i]["name"]} (height: ${pokemonList[i]["height"]}m) </div>`);
     }
     else {
-        document.write(`<div class="grid__item"> ${pokemonList[i]["name"]} (height: ${pokemonList[i]["height"]}m) <span>- That's quite big!</span> </div>`);
+        document.write(`<div class="pokemon-grid__item"> ${pokemonList[i]["name"]} (height: ${pokemonList[i]["height"]}m) <span>- That's quite big!</span> </div>`);
     }
   };
