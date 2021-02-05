@@ -1,3 +1,7 @@
+
+/* IIFE that stores the whole Pokémon repository and returns an object with methods
+ to get the whole repository, add Pokemon to the array 
+ and check wether a Pokemon is part of the repository */
 let pokemonRepository = (function() {
   let pokemonList = [
     {name: "Bulbasaur", height: 0.7, weight: 6.9, types: ["grass", "poison"]},
@@ -7,6 +11,7 @@ let pokemonRepository = (function() {
     {name: "Snorlax", height: 2.1, weight: 460, types: ["normal"]}
     ];
 
+    /* function to add Pokemon to the pokemonRepository */
     function add (newPokemon) {
       if (typeof newPokemon === "object") {
         if (Object.keys(newPokemon) === ["name", "height", "weight", "types"]) {
@@ -21,7 +26,23 @@ let pokemonRepository = (function() {
       }
     };
 
+    /* fuction to check wether a certain Pokémon is part of the pokemonRepository
+    returns a Boolean */
+    function isInRepository(pokemon) {
+      let filteredList = pokemonList.filter(item => item.name.toLowerCase() === pokemon.toLowerCase()) // converts input and list item to lowercase
+      if (filteredList.length > 0) { // check wether filteredList contains a match
+        filteredList.forEach(x => console.log(
+        `${x.name} (${x.height}m ${x.weight}kg ${x.types})`)) //formated for readability in console
+        return true
+      }
+      else {
+        console.error("Pokemon is not part of repository");
+        console.log("add Pokemon by calling pokemonRepository.add(pokemon)")
+        return false
+      }
+    }
 
+    /* fucntion to get the whole pokemonRepository, returns an Array */
     function getAll() {
       return pokemonList
     };
@@ -29,10 +50,13 @@ let pokemonRepository = (function() {
     return {
       add: add,
       getAll: getAll,
+      isInRepository: isInRepository
       }
   })();
 
-let displayPokemon = (function () {
+
+
+let displayPokemon = function () {
   pokemonRepository.getAll().forEach(function(pokemon) {
     if (pokemon.height < 1) {
       document.write(`<div class="pokemon-grid__item">${pokemon.name}
@@ -43,4 +67,6 @@ let displayPokemon = (function () {
         (height: ${pokemon.height}m) <span>- That's quite big!</span> </div>`)
     }
   })
-})();
+};
+
+displayPokemon();
