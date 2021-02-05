@@ -8,17 +8,16 @@ let pokemonList = [
 
 
 function printPokemonList(pokeArray) {
-  for (let i = 0; i< pokeArray.length; i++) {
-      console.log(pokeArray[i].name);
-      if (pokeArray[i].height < 1) {
-        document.write(`<div class="pokemon-grid__item">${pokeArray[i]["name"]}
-        (height: ${pokeArray[i]["height"]}m) </div>`);
+  pokeArray.forEach(function (pokemon) {
+      if (pokemon.height < 1) {
+        document.write(`<div class="pokemon-grid__item">${pokemon.name}
+        (height: ${pokemon.height}m) </div>`);
       }
       else {
-          document.write(`<div class="pokemon-grid__item"> ${pokeArray[i]["name"]}
-          (height: ${pokeArray[i]["height"]}m) <span>- That's quite big!</span> </div>`);
+          document.write(`<div class="pokemon-grid__item"> ${pokemon.name}
+          (height: ${pokemon.height}m) <span>- That's quite big!</span> </div>`);
       }
-    };
+    })
 };
 
 printPokemonList(pokemonList);
