@@ -8,7 +8,17 @@ let pokemonRepository = (function() {
     ];
 
     function add (newPokemon) {
-      pokemonList.push(newPokemon);
+      if (typeof newPokemon === "object") {
+        if (Object.keys(newPokemon) === ["name", "height", "weight", "types"]) {
+          pokemonList.push(newPokemon);
+        }
+        else {
+          console.error("Please enter valid Pokemon object with name, height, weight and types as an Array")
+        }
+      }
+      else {
+        console.error("This is not a valid Pokemon object")
+      }
     };
 
 
