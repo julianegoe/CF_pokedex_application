@@ -6,14 +6,19 @@ let pokemonList = [
 {name: "Snorlax", height: 2.1, weight: 460, types: ["normal"]}
 ];
 
-for (let i = 0; i< pokemonList.length; i++) {
-    console.log(pokemonList[i].name);
-    if (pokemonList[i].height < 1) {
-      document.write(`<div class="pokemon-grid__item">${pokemonList[i]["name"]}
-      (height: ${pokemonList[i]["height"]}m) </div>`);
-    }
-    else {
-        document.write(`<div class="pokemon-grid__item"> ${pokemonList[i]["name"]}
-        (height: ${pokemonList[i]["height"]}m) <span>- That's quite big!</span> </div>`);
-    }
-  };
+
+function printPokemonList(pokeArray) {
+  for (let i = 0; i< pokeArray.length; i++) {
+      console.log(pokeArray[i].name);
+      if (pokeArray[i].height < 1) {
+        document.write(`<div class="pokemon-grid__item">${pokeArray[i]["name"]}
+        (height: ${pokeArray[i]["height"]}m) </div>`);
+      }
+      else {
+          document.write(`<div class="pokemon-grid__item"> ${pokeArray[i]["name"]}
+          (height: ${pokeArray[i]["height"]}m) <span>- That's quite big!</span> </div>`);
+      }
+    };
+};
+
+printPokemonList(pokemonList);
