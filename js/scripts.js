@@ -33,18 +33,11 @@ let pokemonRepository = (function() {
     /* fuction to check wether a certain Pokémon is part of the pokemonRepository
     returns a Boolean */
     function isInRepository(pokemon) {
-      let filteredList = pokemonList.filter(item => item.name.toLowerCase() === pokemon.toLowerCase()) // converts input and list item to lowercase
-      if (filteredList.length > 0) { // check wether filteredList contains a match
-        filteredList.forEach(x => console.log(
-        `${x.name} (${x.height}m ${x.weight}kg ${x.types})`)) //formated for readability in console
-        return true
+      let filteredList = pokemonList.filter(function(item) {
+        filteredList.forEach(x => console.log(`${x.name} (${x.height}m ${x.weight}kg ${x.types})`)) //formated for readability in console
+        return item.name===pokemon});
       }
-      else {
-        console.error("Pokemon is not part of repository");
-        console.log("add Pokemon by calling pokemonRepository.add(pokemon)")
-        return false
-      }
-    }
+
 
     /* fucntion to get the whole pokemonRepository, returns an Array */
     function getAll() {
