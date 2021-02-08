@@ -13,8 +13,12 @@ let pokemonRepository = (function() {
 
     /* function to add Pokemon to the pokemonRepository */
     function add (newPokemon) {
+      let pokeKeys = Object.keys(newPokemon);
       if (typeof newPokemon === "object") {
-        if (Object.keys(newPokemon) === ["name", "height", "weight", "types"]) {
+        if (pokeKeys[0] === "name" 
+        && pokeKeys[1] === "height" 
+        && pokeKeys[2] === "weight" 
+        && pokeKeys[3] === "types") {
           pokemonList.push(newPokemon);
         }
         else {
