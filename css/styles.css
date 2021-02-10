@@ -5,7 +5,7 @@
   --primary-color-darkgreen: #026670;
   --secondary-color-lightgreen: #9fedd7;
   --secondary-color-darkyellow: #fce181;
-  --tertiary-color-lightgrey: #edeae5;
+  --tertiary-color-lightgrey: #f8f5ef;
   --tertiary-color-lightyellow: #fef9c7;
   --font-size-xs: 10px;
   --font-size-s: 14px;
@@ -26,6 +26,7 @@ body {
   font-weight: var(--front-weight-400);
   line-height: 1.6;
   font-size: var(--font-size-m);
+  background-color: var(--tertiary-color-lightgrey);
 
   /* The whole body uses a grid layout of three columns */
   display: grid;
@@ -33,7 +34,7 @@ body {
 }
 
 header {
-  background-color: lightyellow;
+  background-color: var(--secondary-color-lightgreen);
   padding: 20px;
 
   /* The header spans a grid of 1 row and 2 columns */
@@ -49,7 +50,9 @@ main {
 
 button {
   cursor: pointer;
+  border: none;
   background-color: white;
+  box-shadow: 2px 2px 2px silver
 }
 
 .navigation-list {
@@ -130,7 +133,6 @@ a:active {
   }
 
   .pokemon-grid__item {
-    border: 1px solid;
     padding: 20px;
     margin: 10px;
     width: auto;
