@@ -47,6 +47,11 @@ main {
   grid-area: 2 / 1 / span 1 / span 2;
 }
 
+button {
+  cursor: pointer;
+  background-color: white;
+}
+
 .navigation-list {
   list-style: none;
 }

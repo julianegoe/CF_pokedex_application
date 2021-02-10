@@ -30,13 +30,28 @@ let pokemonRepository = (function() {
       }
     };
 
+    // function that takes an object and appends it to pokemon list in the Frotend
+    function addListItem (pokemon) {
+      let spanText = pokemon.height < 1 ? " " : " - This is a big one!"; // create additional text to display when Pokemon is bigger than 1
+      let pokemonGrid = document.querySelector(".pokemon-grid"); // queries pokemon-grid class
+      let button = document.createElement("button"); // creates new div
+      button.setAttribute("class", "pokemon-grid__item"); // sets class pokemon-grid_item to div
+      pokemonGrid.appendChild(button); // appends div to parent element pokemon-grid
+      button.innerText = `${pokemon.name} (height: ${pokemon.height}m)${spanText}`; //adds information from passed object and additional text to pokemon-grid_item
+      button.addEventListener('click', function(event) {showDetails(pokemon)}); //added eventlistener to button
+    };
+
+    function showDetails(pokemon) {
+      console.log(pokemon);
+    };
+
     /* fuction to check wether a certain Pokémon is part of the pokemonRepository
     returns a Boolean */
     function isInRepository(pokemon) {
       let filteredList = pokemonList.filter(function(item) {
         filteredList.forEach(x => console.log(`${x.name} (${x.height}m ${x.weight}kg ${x.types})`)) //formated for readability in console
         return item.name===pokemon});
-      }
+      };
 
 
     /* fucntion to get the whole pokemonRepository, returns an Array */
@@ -47,23 +62,15 @@ let pokemonRepository = (function() {
     return {
       add: add,
       getAll: getAll,
-      isInRepository: isInRepository
+      isInRepository: isInRepository,
+      addListItem: addListItem,
       }
   })();
 
 
 
 let displayPokemon = function () {
-  pokemonRepository.getAll().forEach(function(pokemon) {
-    if (pokemon.height < 1) {
-      document.write(`<div class="pokemon-grid__item">${pokemon.name}
-      (height: ${pokemon.height}m) </div>`);
-    }
-    else {
-        document.write(`<div class="pokemon-grid__item"> ${pokemon.name}
-        (height: ${pokemon.height}m) <span>- That's quite big!</span> </div>`)
-    }
-  })
-};
+  pokemonRepository.getAll().forEach(pokemon => pokemonRepository.addListItem(pokemon));
+  };
 
 displayPokemon();
