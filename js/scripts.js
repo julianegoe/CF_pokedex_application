@@ -38,9 +38,13 @@ let pokemonRepository = (function() {
       button.setAttribute("class", "pokemon-grid__item"); // sets class pokemon-grid_item to div
       pokemonGrid.appendChild(button); // appends div to parent element pokemon-grid
       button.innerText = `${pokemon.name} (height: ${pokemon.height}m)${spanText}`; //adds information from passed object and additional text to pokemon-grid_item
-      button.addEventListener('click', function(event) {showDetails(pokemon)}); //added eventlistener to button
+      logPokemon(pokemon, button)
     };
 
+    function logPokemon (pokemon, element) {
+      element.addEventListener('click', function(event) {showDetails(pokemon)}); //added eventlistener to button
+    };
+    
     function showDetails(pokemon) {
       console.log(pokemon);
     };

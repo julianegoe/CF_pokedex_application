@@ -124,6 +124,12 @@ a:active {
   width: 33%;
 }
 
+.header-logo {
+  background-color: white;
+  border: black;
+  padding: 10px;
+}
+
 @supports (display: grid) {
   .pokemon-grid {
     display: grid;
