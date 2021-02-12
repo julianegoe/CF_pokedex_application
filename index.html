@@ -13,7 +13,7 @@
     <!--This is where the head with a logo and navigation is-->
   		<header>
   			<div class="header-elements">
-  				<p>Pokédex</p>
+					<p class="header-logo">Pokédex</p>
   			<nav>
   				<ul class="navigation-list">
   					<li class="navigation-list__item">
@@ -27,8 +27,11 @@
     <!--This is where the main content with a grid of pokemon is-->
   		<main>
         <div class="pokemon-grid">
-        <script src="js/scripts.js"></script> 
+			<script src="js/promise-polyfill.js"></script>
+			<script src="js/fetch.umd.js"></script>
+        	<script src="js/scripts.js"></script> 
         </div>
   		</main>
+
 	</body>
 </html>
