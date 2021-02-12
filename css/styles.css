@@ -167,26 +167,37 @@ a:active {
   }
 }
 
-/* Layout for all screens between 600px and 900px wide */
-@media all and (min-width: 600px) and (max-width: 900px) {
+@media all and (min-width: 600px) and (max-width: 800px) {
   .pokemon-grid {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 15px;
   }
 
   .pokemon-grid__item {
-    grid-column: 2 / 5;
+    grid-column: auto / auto;
+  }
+}
+
+/* Layout for all screens between 600px and 900px wide */
+@media all and (min-width: 800px) and (max-width: 1200px) {
+  .pokemon-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+  }
+
+  .pokemon-grid__item {
+    grid-column: auto / auto;
   }
 }
 
 /* Layout for all screens wider than 900px */
-@media all and (min-width: 900px) {
+@media all and (min-width: 1200px) {
   .pokemon-grid {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
   }
 
   .pokemon-grid__item {
-    grid-column: 2 / 5;
+    grid-column: auto / auto;
   }
 }
