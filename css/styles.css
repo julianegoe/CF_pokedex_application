@@ -154,7 +154,7 @@ a:active {
   }
 
   .pokemon-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr auto;
     grid-gap: 15px;
   }
 
@@ -170,12 +170,12 @@ a:active {
 /* Layout for all screens between 600px and 900px wide */
 @media all and (min-width: 600px) and (max-width: 900px) {
   .pokemon-grid {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 15px;
   }
 
   .pokemon-grid__item {
-    grid-column: 2 / 3;
+    grid-column: 2 / 5;
   }
 }
 
