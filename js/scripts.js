@@ -25,7 +25,7 @@ let pokemonRepository = (function () {
     let button = document.createElement("button"); // creates new button
     button.setAttribute("class", "pokemon-grid__item"); // sets class pokemon-grid_item to button
     pokemonGrid.appendChild(button); // appends button to parent element pokemon-grid
-    button.innerText = `${pokemon.name}`; //adds information from passed object and additional text to pokemon-grid_item
+    button.innerText = `${capitalizeFirstLetter(pokemon.name)}`; //adds information from passed object and additional text to pokemon-grid_item
     logPokemon(pokemon, button)
   };
 
@@ -105,6 +105,12 @@ let pokemonRepository = (function () {
       return item.name === pokemon
     });
   };
+
+  /* Capitalizes the first letter of a Pokemon name */
+  function capitalizeFirstLetter (pokemonName) {
+    let capitalizedName = pokemonName[0].toUpperCase() + pokemonName.slice(1);
+    return capitalizedName
+  }
 
 
   /* fucntion to get the whole pokemonRepository, returns an Array */
