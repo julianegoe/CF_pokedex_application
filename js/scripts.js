@@ -25,7 +25,7 @@ let pokemonRepository = (function () {
     let button = document.createElement("button"); // creates new button
     button.setAttribute("class", "pokemon-grid__item"); // sets class pokemon-grid_item to button
     pokemonGrid.appendChild(button); // appends button to parent element pokemon-grid
-    button.innerText = `${capitalizeFirstLetter(pokemon.name)}`; //adds information from passed object and additional text to pokemon-grid_item
+    button.innerText = `${getIndexOfPokemon(pokemon)} ${capitalizeFirstLetter(pokemon.name)}`; //adds information from passed object and additional text to pokemon-grid_item
     logPokemon(pokemon, button)
   };
 
@@ -112,6 +112,10 @@ let pokemonRepository = (function () {
     return capitalizedName
   }
 
+  function getIndexOfPokemon (pokemon) {
+    let index = pokemonList.indexOf(pokemon) + 1;
+    return "#" + index
+  }
 
   /* fucntion to get the whole pokemonRepository, returns an Array */
   function getAll() {
