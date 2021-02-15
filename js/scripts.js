@@ -83,7 +83,7 @@ let pokemonRepository = (function () {
         console.log(div);
         let ul = document.createElement("ul");
         let li = document.createElement("li");
-        li.innerText = item.type.name;
+        li.innerText = capitalizeFirstLetter(item.type.name);
         div.appendChild(ul);
         ul.appendChild(li);
         console.log(item.type.name)
