@@ -55,37 +55,19 @@ button {
   box-shadow: 2px 2px 2px silver
 }
 
-.navigation-list {
-  list-style: none;
-}
-
-.navigation-list li {
-  display: inline-block;
-  margin-right: 15px;
-}
-
-.header-elements {
-  display: flex;
-  justify-content: space-between;
+#button-close {
+  background-color: none;
+  box-shadow: none;
 }
 
 span {
   background: lightyellow;
 }
 
-h1 {
-  display: inline;
-  font-family: 'Raleway', sans-serif;
-  font-weight: var(--front-weight-900);
-  font-size: var(--font-size-l);
-  color: white;
-  background-color: var(--primary-color-pink);
-  box-shadow: var(--page-box-shadow);
-}
-
 h2 {
   font-family: 'Raleway', sans-serif;
   font-weight: var(--front-weight-800);
+  margin: 0;
 }
 
 h3 {
@@ -116,6 +98,90 @@ a:focus {
 a:active {
   /* selected link */
   color: var(--primary-color-darkgreen);
+}
+
+#modal-container {
+  display: none;
+}
+
+#modal-container.is-visible {
+  position: fixed;
+  padding: 20px;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  /* to show it above other content */
+  z-index: 999; 
+    
+  /* to allow scrolling if the screen is not high enough*/
+  overflow: auto; 
+
+  /* this is used to center the modal */
+  display: grid;
+  text-align: center;
+}
+
+.modal {
+  margin: auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  grid-gap: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  padding: 15px;
+  width: 100%;
+  max-width: 500px;
+  text-align: left;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+}
+ 
+.modal-headline{
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.modal-close{
+  text-align: right;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.modal-image {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  
+}
+
+.modal-details {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  padding: 15px;
+}
+
+.modal-list {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.navigation-list {
+  list-style: none;
+}
+
+.navigation-list li {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.header-elements {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* start grid fallback */
@@ -164,6 +230,38 @@ a:active {
 
   h1 {
     font-size: var(--font-size-m);
+  }
+
+  .modal {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    grid-gap: 10px;
+  }
+  
+  .modal-headline{
+    grid-column: 1;
+    grid-row: 1 / 2;
+  }
+  
+  .modal-close{
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+  }
+  
+  .modal-image {
+    grid-column: 1;
+    grid-row: 2 / 3;
+    
+  }
+  
+  .modal-details {
+    grid-column: 1;
+    grid-row: 3 / span 1;
+  }
+  
+  .modal-list {
+    grid-column: 1;
+    grid-row: 3 / span 1;
   }
 }
 
