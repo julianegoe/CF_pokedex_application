@@ -26,14 +26,7 @@ let pokemonRepository = (function () {
     button.setAttribute("class", "pokemon-grid__item"); // sets class pokemon-grid_item to button
     pokemonGrid.appendChild(button); // appends button to parent element pokemon-grid
     button.innerText = `${getIndexOfPokemon(pokemon)} ${capitalizeFirstLetter(pokemon.name)}`; //adds information from passed object and additional text to pokemon-grid_item
-    logPokemon(pokemon, button)
-  };
-
-  /* Logs Pokemon details in console on Click */
-  function logPokemon(pokemon, element) {
-    element.addEventListener('click', function (event) {
-      showDetails(pokemon)
-    }); //added eventlistener to button
+    button.addEventListener('click', () => {showModal(pokemon)})
   };
 
   /* Loads Kanto Pokemon asynchronously */
@@ -74,9 +67,25 @@ let pokemonRepository = (function () {
 
   /* Logs Pokemon Details in the console once they have loaded */
   function showDetails(pokemon) {
+    let modal = document.querySelector(".modal");
+    let h2 = document.createElement("h2");
+    h2.classList.add("modal-headline");
+    h2.innerText = getIndexOfPokemon(pokemon) + " " + capitalizeFirstLetter(pokemon.name);
+    modal.appendChild(h2);
     loadDetails(pokemon).then(function (response) {
       console.log(response[0]);
+      let img = document.createElement("img");
+      img.classList.add("modal-image");
+      img.setAttribute("src", response[0]);
+      modal.appendChild(img);
       response[1].forEach(function (item) {
+        let div = document.querySelector(".modal-details");
+        console.log(div);
+        let ul = document.createElement("ul");
+        let li = document.createElement("li");
+        li.innerText = item.type.name;
+        div.appendChild(ul);
+        ul.appendChild(li);
         console.log(item.type.name)
       })
     });
@@ -112,6 +121,13 @@ let pokemonRepository = (function () {
     return capitalizedName
   }
 
+  function showModal (pokemon) {
+    showDetails(pokemon)
+    let modal = document.querySelector("#modal-container");
+    modal.classList.add("is-visible");
+    modal.parentElement.appendChild(modal);
+  }
+
   function getIndexOfPokemon (pokemon) {
     let index = pokemonList.indexOf(pokemon) + 1;
     return "#" + index
@@ -129,7 +145,8 @@ let pokemonRepository = (function () {
     isInRepository: isInRepository,
     addListItem: addListItem,
     loadPokemonList: loadPokemonList,
-    loadDetails: loadDetails
+    loadDetails: loadDetails,
+    showModal: showModal
   }
 })();
 
