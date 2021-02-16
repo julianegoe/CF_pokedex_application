@@ -10,7 +10,8 @@ let modalContainer = document.querySelector('#modal-container');
     let pokeKeys = Object.keys(newPokemon);
     if (typeof newPokemon === "object") {
       if (pokeKeys[0] === "name" &&
-        pokeKeys[1] === "detailsUrl") {
+        pokeKeys[1] === "detailsUrl") 
+        {
         pokemonList.push(newPokemon);
       } else {
         console.error("Please enter valid Pokemon object")
@@ -40,7 +41,7 @@ let modalContainer = document.querySelector('#modal-container');
       return json.results.forEach(function (item) {
         let pokemon = {
           name: item.name,
-          detailsUrl: item.url
+          detailsUrl: item.url,
         };
         add(pokemon)
       });
@@ -58,7 +59,7 @@ let modalContainer = document.querySelector('#modal-container');
       return response.json();
     }).then(function (json) {
       hideLoadingMessage()
-      let details = [json.sprites.front_default, json.types]; //string of sprite png and Array of types
+      let details = [json.sprites.front_default, json.types, json.id, json.height]; //string of sprite png and Array of types
       return details
     }).catch(function (e) {
       hideLoadingMessage()
@@ -69,8 +70,7 @@ let modalContainer = document.querySelector('#modal-container');
   /* Logs Pokemon Details in the console once they have loaded */
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function (response) {
-      showModal(pokemon.name, response[1], response[0]);
-      console.log(response[1])
+      showModal(response[2], pokemon.name, response[1], response[0], response[3]);
     })
   }
 
@@ -104,7 +104,7 @@ let modalContainer = document.querySelector('#modal-container');
     return capitalizedName
   }
 
-  function showModal (pokemonName, pokemonDetails, pokemonPicture) {
+  function showModal (pokemonID, pokemonName, pokemonDetails, pokemonPicture, pokemonHeight) {
     let modalContainer = document.querySelector("#modal-container");
     modalContainer.classList.add("is-visible");
 
@@ -117,14 +117,14 @@ let modalContainer = document.querySelector('#modal-container');
     modalContainer.appendChild(modal);
     let h2 = document.createElement("h2");
     h2.classList.add("modal-headline");
-    h2.innerText = capitalizeFirstLetter(pokemonName);
+    h2.innerText = "#" + pokemonID + " " + capitalizeFirstLetter(pokemonName);
     modal.appendChild(h2);
     let modalClose = document.createElement("div");
     modalClose.classList.add("modal-close");
     modal.appendChild(modalClose);
     let button = document.createElement("button");
     button.setAttribute("id", "button-close");
-    button.innerText = "x";
+    button.innerText = "close";
     modalClose.appendChild(button);
     let img = document.createElement("img");
     img.classList.add("modal-image");
@@ -134,7 +134,7 @@ let modalContainer = document.querySelector('#modal-container');
     modalDetails.classList.add("modal-details");
     modal.appendChild(modalDetails);
     let p = document.createElement("p");
-    p.innerText = "The Pokémon has type(s):";
+    p.innerText = "Types:";
     modalDetails.appendChild(p);
     let ul = document.createElement("ul");
     modalDetails.appendChild(ul);
@@ -143,6 +143,14 @@ let modalContainer = document.querySelector('#modal-container');
       li.innerText = capitalizeFirstLetter(item.type.name);
       ul.appendChild(li);
     });
+    let p2 = document.createElement("p");
+    p2.innerText = "Height:";
+    modalDetails.appendChild(p2);
+    let ul2 = document.createElement("ul");
+    modalDetails.appendChild(ul2);
+    let li2 = document.createElement("li");
+    li2.innerText = pokemonHeight + " meters";
+    ul2.appendChild(li2);
     button.addEventListener('click', hideModal);
   }
 
@@ -159,7 +167,6 @@ let modalContainer = document.querySelector('#modal-container');
 
   /* fucntion to get the whole pokemonRepository, returns an Array */
   function getAll() {
-    console.log(pokemonList)
     return pokemonList
   };
 
@@ -194,7 +201,6 @@ let modalContainer = document.querySelector('#modal-container');
 /* Fetches and displays Pokemon data */
 let displayPokemon = function () {
   pokemonRepository.loadPokemonList().then(function (response) {
-    console.log(response);
     pokemonRepository.getAll().forEach(pokemon => pokemonRepository.addListItem(pokemon));
   }).catch(function (e) {
     console.log(e)
