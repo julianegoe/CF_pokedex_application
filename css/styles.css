@@ -22,7 +22,7 @@
 }
 
 body {
-  font-family: 'Space Mono', monospace;
+  font-family: 'Raleway', sans-serif;
   font-weight: var(--front-weight-400);
   line-height: 1.6;
   font-size: var(--font-size-m);
@@ -31,6 +31,14 @@ body {
   /* The whole body uses a grid layout of three columns */
   display: grid;
   grid-template-rows: auto 1fr auto;
+}
+
+span {
+  float: right;
+}
+
+td {
+  padding-left: 15px;
 }
 
 header {
@@ -182,16 +190,19 @@ a:active {
 .modal-image {
   grid-column: 1 / 2;
   grid-row: 2 / 3;
-  width: 100%;
+  align-self: center;
   height: auto;
   padding: 20px;
+  width: 100%;
   
 }
 
 .modal-details {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
-  padding: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .modal-list {
