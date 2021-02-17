@@ -105,24 +105,31 @@ let modalContainer = document.querySelector('#modal-container');
   }
 
   function showModal (pokemonID, pokemonName, pokemonTypes, pokemonPicture, pokemonHeight, pokemonWeight) {
+    
+    // query modal container and make visible
     let modalContainer = document.querySelector("#modal-container");
     modalContainer.classList.add("is-visible");
-    console.log(pokemonWeight);
 
     // clear Modal content
     modalContainer.innerHTML = "";
 
-    // Create each element of Modal Container
+    // Create modal
     let modal = document.createElement("div");
     modal.classList.add("modal");
     modalContainer.appendChild(modal);
+
+    //create modal header background
     let header = document.createElement("div");
     header.setAttribute("id", "modal-header-background");
     modal.appendChild(header);
+
+    //create modal headline
     let h2 = document.createElement("h2");
     h2.classList.add("modal-headline");
     h2.innerText = "#" + pokemonID + " " + capitalizeFirstLetter(pokemonName);
     modal.appendChild(h2);
+
+    //create modal closing section
     let modalClose = document.createElement("div");
     modalClose.classList.add("modal-close");
     modal.appendChild(modalClose);
@@ -130,10 +137,14 @@ let modalContainer = document.querySelector('#modal-container');
     button.setAttribute("id", "button-close");
     button.innerText = "close";
     modalClose.appendChild(button);
+
+    //create modal image section
     let img = document.createElement("img");
     img.classList.add("modal-image");
     img.setAttribute("src", pokemonPicture);
     modal.appendChild(img);
+
+    //create modal details section as html table
     let modalDetails = document.createElement("div");
     modalDetails.classList.add("modal-details");
     modal.appendChild(modalDetails);
