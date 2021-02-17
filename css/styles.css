@@ -38,7 +38,7 @@ span {
 }
 
 td {
-  padding-left: 15gitpx;
+  padding-left: 15px;
 }
 
 header {
@@ -73,7 +73,7 @@ button:focus {
 #button-close {
   background-color: none;
   box-shadow: none;
-  margin-right: 5px;
+  padding-right: 15px;
   font-size: var(--font-size-s);
   font-family: 'Raleway', sans-serif;
   font-weight: var(--front-weight-800);
@@ -160,12 +160,10 @@ a:active {
   grid-gap: 10px;
   box-sizing: border-box;
   background: #fff;
-  /* padding: 20px; */
   width: 100%;
   max-width: 500px;
   text-align: left;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
 }
  
 #modal-header-background {
@@ -312,6 +310,10 @@ a:active {
     grid-column: 1;
     grid-row: 3 / span 1;
     padding: 30px;
+  }
+
+  #button.close {
+    padding-right: 10px;
   }
 }
 

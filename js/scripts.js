@@ -159,7 +159,7 @@ let modalContainer = document.querySelector('#modal-container');
     thHeight.innerHTML = "Height:";
     trHeight.appendChild(thHeight);
     let tdHeight = document.createElement("td");
-    tdHeight.innerHTML = `${pokemonHeight} m`;
+    tdHeight.innerHTML = `${pokemonHeight}0 cm`;
     trHeight.appendChild(tdHeight);
     let thWeight = document.createElement("th");
     thWeight.innerHTML = "Weight:";
