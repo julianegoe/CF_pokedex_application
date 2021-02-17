@@ -2,16 +2,15 @@
  to get the whole repository, add Pokemon to the array 
  and check wether a Pokemon is part of the repository */
 let pokemonRepository = (function () {
-let pokemonList = [];
-let modalContainer = document.querySelector('#modal-container');
+  let pokemonList = [];
+  let modalContainer = document.querySelector('#modal-container');
 
   /* function to add Pokemon to the pokemonRepository */
   function add(newPokemon) {
     let pokeKeys = Object.keys(newPokemon);
     if (typeof newPokemon === "object") {
       if (pokeKeys[0] === "name" &&
-        pokeKeys[1] === "detailsUrl") 
-        {
+        pokeKeys[1] === "detailsUrl") {
         pokemonList.push(newPokemon);
       } else {
         console.error("Please enter valid Pokemon object")
@@ -28,7 +27,9 @@ let modalContainer = document.querySelector('#modal-container');
     button.setAttribute("class", "pokemon-grid__item"); // sets class pokemon-grid_item to button
     pokemonGrid.appendChild(button); // appends button to parent element pokemon-grid
     button.innerText = `${getIndexOfPokemon(pokemon)} ${capitalizeFirstLetter(pokemon.name)}`; //adds information from passed object and additional text to pokemon-grid_item
-    button.addEventListener('click', (event) => {showDetails(pokemon)})
+    button.addEventListener('click', (event) => {
+      showDetails(pokemon)
+    })
   };
 
   /* Loads Kanto Pokemon asynchronously */
@@ -82,7 +83,7 @@ let modalContainer = document.querySelector('#modal-container');
     div.innerText = "Fetching Pokemon data...";
     pokemonGrid.appendChild(div)
   }
-/* Hides a message defined in showLoadingMessage to be used when something is done loading */
+  /* Hides a message defined in showLoadingMessage to be used when something is done loading */
   function hideLoadingMessage() {
     let div = document.querySelector("div.pokemon-grid__item")
     div.parentElement.removeChild(div);
@@ -99,30 +100,37 @@ let modalContainer = document.querySelector('#modal-container');
   };
 
   /* Capitalizes the first letter of a Pokemon name */
-  function capitalizeFirstLetter (pokemonName) {
+  function capitalizeFirstLetter(pokemonName) {
     let capitalizedName = pokemonName[0].toUpperCase() + pokemonName.slice(1);
     return capitalizedName
   }
 
-  function showModal (pokemonID, pokemonName, pokemonTypes, pokemonPicture, pokemonHeight, pokemonWeight) {
+  function showModal(pokemonID, pokemonName, pokemonTypes, pokemonPicture, pokemonHeight, pokemonWeight) {
+
+    // query modal container and make visible
     let modalContainer = document.querySelector("#modal-container");
     modalContainer.classList.add("is-visible");
-    console.log(pokemonWeight);
 
     // clear Modal content
     modalContainer.innerHTML = "";
 
-    // Create each element of Modal Container
+    // Create modal
     let modal = document.createElement("div");
     modal.classList.add("modal");
     modalContainer.appendChild(modal);
+
+    //create modal header background
     let header = document.createElement("div");
     header.setAttribute("id", "modal-header-background");
     modal.appendChild(header);
+
+    //create modal headline
     let h2 = document.createElement("h2");
     h2.classList.add("modal-headline");
     h2.innerText = "#" + pokemonID + " " + capitalizeFirstLetter(pokemonName);
     modal.appendChild(h2);
+
+    //create modal closing section
     let modalClose = document.createElement("div");
     modalClose.classList.add("modal-close");
     modal.appendChild(modalClose);
@@ -130,10 +138,14 @@ let modalContainer = document.querySelector('#modal-container');
     button.setAttribute("id", "button-close");
     button.innerText = "close";
     modalClose.appendChild(button);
+
+    //create modal image section
     let img = document.createElement("img");
     img.classList.add("modal-image");
     img.setAttribute("src", pokemonPicture);
     modal.appendChild(img);
+
+    //create modal details section as html table
     let modalDetails = document.createElement("div");
     modalDetails.classList.add("modal-details");
     modal.appendChild(modalDetails);
@@ -167,7 +179,9 @@ let modalContainer = document.querySelector('#modal-container');
     let tdWeight = document.createElement("td");
     tdWeight.innerHTML = `${pokemonWeight} kg`;
     trWeight.appendChild(tdWeight);
-    button.addEventListener('click', (event) => {hideModal()});
+    button.addEventListener('click', (event) => {
+      hideModal()
+    });
   }
 
   function hideModal() {
@@ -176,7 +190,7 @@ let modalContainer = document.querySelector('#modal-container');
     modal.parentElement.appendChild(modal);
   }
 
-  function getIndexOfPokemon (pokemon) {
+  function getIndexOfPokemon(pokemon) {
     let index = pokemonList.indexOf(pokemon) + 1;
     return "#" + index
   }
@@ -188,7 +202,7 @@ let modalContainer = document.querySelector('#modal-container');
 
   window.addEventListener('keydown', (e) => {
     if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
-      hideModal();  
+      hideModal();
     }
   });
 
