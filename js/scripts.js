@@ -30,7 +30,7 @@ let pokemonRepository = (function () {
     button.attr("data-toggle", "modal");
     button.attr("data-target", "#detailsModal");
     divCol.append(button);
-    button.click(showDetails(pokemon))
+    button.click(e => {showDetails(pokemon)})
   };
 
   /* Loads Kanto Pokemon asynchronously */
