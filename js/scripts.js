@@ -91,7 +91,7 @@ let pokemonRepository = (function () {
     let modalContainer = $('<div class="container"></div>')
     let modalBody = $(`<div class=" row justify-content-center modal-body"></div>}`);
     modalContainer.append(modalBody);
-    modalBody.append(`<img class="col-6 m-4 img-fluid" src="${pokemonImage}">`)
+    modalBody.append(`<img class="col-6 m-4 img-fluid" src="${pokemonImage}" aria-label="A cartoon image of ${pokemonName}">`)
     modalBody.append(`<p class="col-6 m-2"><strong>Height:</strong> ${pokemonHeight}0 cm</p>`);
     modalBody.append(`<p class="col-6 m-2"><strong>Weight:</strong> ${pokemonWeight} kg</p>`);
     let typesDiv = $(`<div id="type-div" class="col-6 m-2"><strong>Types: </strong></div>`);
