@@ -30,7 +30,11 @@ let pokemonRepository = (function () {
     button.attr("data-toggle", "modal");
     button.attr("data-target", "#detailsModal");
     divCol.append(button);
-    button.click(e => {showDetails(pokemon)})
+    
+    // Click event on Button
+    button.click(e => {
+      showDetails(pokemon)
+    })
   };
 
   /* Loads Kanto Pokemon asynchronously */
@@ -53,7 +57,8 @@ let pokemonRepository = (function () {
     })
   };
 
-  /* Loads Details of Pokemon asynchronously and returns Image URL and types */
+  /*Loads Details of Pokemon asynchronously and returns Image URL, types,
+  ID, height and weight */
   function loadDetails(object) {
     showLoadingMessage();
     console.log(object.detailsUrl)
@@ -72,14 +77,18 @@ let pokemonRepository = (function () {
 
   function showModal(pokemonId, pokemonName, pokemonTypes, pokemonImage, pokemonHeight, pokemonWeight) {
     let modalContent = $(".modal-content");
-    //clear Details
+
+    //clear Modal content
     modalContent.empty();
 
+    // construct Modal header
     let modalHeader = $(`<div class="modal-header">#${pokemonId} ${capitalizeFirstLetter(pokemonName)}</div>`);
     modalContent.append(modalHeader);
     let closeButton = $('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
     modalHeader.append(closeButton);
-    let modalContainer = $('<div class="contaienr"></div>')
+
+    // construct Modal body including image and details
+    let modalContainer = $('<div class="container"></div>')
     let modalBody = $(`<div class=" row justify-content-center modal-body"></div>}`);
     modalContainer.append(modalBody);
     modalBody.append(`<img class="col-6 m-4 img-fluid" src="${pokemonImage}">`)
@@ -93,7 +102,7 @@ let pokemonRepository = (function () {
     modalContent.append(modalBody)
   }
 
-  /* Logs Pokemon Details in the console once they have loaded */
+  // is called to asynchronously load detail data and construct modal
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function (response) {
       showModal(response[2], pokemon.name, response[1], response[0], response[3], response[4]);
@@ -102,27 +111,16 @@ let pokemonRepository = (function () {
 
   /* Displays a message to be used while something is loading asynchronously */
   function showLoadingMessage() {
-    let body = document.querySelector("body");
-    let div = document.createElement("div");
-    div.classList.add("col", "my-3");
-    div.innerText = "Fetching Pokemon data...";
-    body.appendChild(div)
+    let body = $("body");
+    let div = '<div class="col my-3">Fetching Pokemon data...</div';
+    body.append(div)
   }
   /* Hides a message defined in showLoadingMessage to be used when something is done loading */
   function hideLoadingMessage() {
-    let div = document.querySelector("div.col")
-    div.parentElement.removeChild(div);
+    let div = $("div.col");
+    div.remove()
 
   }
-
-  /* fuction to check wether a certain Pokémon is part of the pokemonRepository
-  returns a Boolean */
-  function isInRepository(pokemon) {
-    let filteredList = pokemonList.filter(function (item) {
-      filteredList.forEach(x => console.log(`${x.name}`)) //formated for readability in console
-      return item.name === pokemon
-    });
-  };
 
   /* Capitalizes the first letter of a Pokemon name */
   function capitalizeFirstLetter(pokemonName) {
@@ -143,7 +141,6 @@ let pokemonRepository = (function () {
   return {
     add: add,
     getAll: getAll,
-    isInRepository: isInRepository,
     addListItem: addListItem,
     loadPokemonList: loadPokemonList,
     loadDetails: loadDetails,
