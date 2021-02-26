@@ -1,10 +1,11 @@
 /* IIFE that stores the whole Pokémon repository and returns an object with methods
  to get the whole repository, add Pokemon to the array 
  and check wether a Pokemon is part of the repository */
-let pokemonRepository = (function () {
+ let pokemonRepository = (function () {
   let searchInput = document.querySelector("#search");
   let pokemonList = [];
   let modalContainer = document.querySelector("#modal-container");
+
 
   /* function to add Pokemon to the pokemonRepository */
   function add(newPokemon) {
@@ -21,6 +22,7 @@ let pokemonRepository = (function () {
     }
   }
 
+
   // function that takes an object and appends it to pokemon list in the Frotend
   function addListItem(pokemon) {
     let pokemonGrid = document.querySelector(".pokemon-grid"); 
@@ -33,6 +35,7 @@ let pokemonRepository = (function () {
     })
   }
 
+
   /* Loads Kanto Pokemon asynchronously */
   function loadPokemonList() {
     showLoadingMessage()
@@ -43,7 +46,7 @@ let pokemonRepository = (function () {
       return json.results.forEach(function (item) {
         let pokemon = {
           name: item.name,
-          detailsUrl: item.url
+          detailsUrl: item.url,
         };
         add(pokemon)
       });
@@ -52,6 +55,7 @@ let pokemonRepository = (function () {
       console.log(e);
     })
   }
+
 
   /* Loads Details of Pokemon asynchronously and returns Image URL and types */
   function loadDetails(object) { 
@@ -66,53 +70,33 @@ let pokemonRepository = (function () {
     })
   }
 
-  function showModal(pokemonId, pokemonName, pokemonTypes, pokemonImage, pokemonHeight, pokemonWeight) {
-    let modalContent = $(".modal-content");
 
-    //clear Modal content
-    modalContent.empty();
-
-    // construct Modal header
-    let modalHeader = $(`<div class="modal-header">#${pokemonId} ${capitalizeFirstLetter(pokemonName)}</div>`);
-    modalContent.append(modalHeader);
-    let closeButton = $('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
-    modalHeader.append(closeButton);
-
-    // construct Modal body including image and details
-    let modalContainer = $('<div class="container"></div>')
-    let modalBody = $(`<div class=" row justify-content-center modal-body"></div>}`);
-    modalContainer.append(modalBody);
-    modalBody.append(`<img class="col-6 m-4 img-fluid" src="${pokemonImage}" aria-label="A cartoon image of ${pokemonName}">`)
-    modalBody.append(`<p class="col-6 m-2"><strong>Height:</strong> ${pokemonHeight}0 cm</p>`);
-    modalBody.append(`<p class="col-6 m-2"><strong>Weight:</strong> ${pokemonWeight} kg</p>`);
-    let typesDiv = $(`<div id="type-div" class="col-6 m-2"><strong>Types: </strong></div>`);
-    modalBody.append(typesDiv);
-    pokemonTypes.forEach(function (item) {
-      typesDiv.append(`${capitalizeFirstLetter(item.type.name)} `);
-    })
-    modalContent.append(modalBody)
-  }
-
-  // is called to asynchronously load detail data and construct modal
+  /* Logs Pokemon Details in the console once they have loaded */
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function (response) {
       showModal(response[2], pokemon.name, response[1], response[0], response[3], response[4]);
     })
   }
 
+
   /* Displays a message to be used while something is loading asynchronously */
   function showLoadingMessage() {
-    let body = $("body");
-    let div = '<div class="col my-3">Fetching Pokemon data...</div';
-    body.append(div)
+    let pokemonGrid = document.querySelector(".pokemon-grid");
+    let div = document.createElement("div");
+    div.setAttribute("class", "pokemon-grid__item");
+    div.innerText = "Fetching Pokemon data...";
+    pokemonGrid.appendChild(div)
   }
+
 
   /* Hides a message defined in showLoadingMessage to be used when something is done loading */
   function hideLoadingMessage() {
-    let div = $("div.col");
-    div.remove()
+    let div = document.querySelector("div.pokemon-grid__item")
+    div.parentElement.removeChild(div);
+
 
   }
+
 
   /* fuction to check wether a certain Pokémon is part of the pokemonRepository
   returns a Boolean */
@@ -123,11 +107,13 @@ let pokemonRepository = (function () {
     });
   }
 
+
   /* Capitalizes the first letter of a Pokemon name */
   function capitalizeFirstLetter(pokemonName) {
     let capitalizedName = pokemonName[0].toUpperCase() + pokemonName.slice(1);
     return capitalizedName
   }
+
 
 /*   function showLoadingSpinner(modal) {
     let modalDiv = document.querySelector(modal);
@@ -143,30 +129,37 @@ let pokemonRepository = (function () {
     spinner.parentElement.removeChild(spinner)
   } */
 
+
   function showModal(pokemonID, pokemonName, pokemonTypes, pokemonPicture, pokemonHeight, pokemonWeight) {
+
 
     // query modal container and make visible
     let modalContainer = document.querySelector("#modal-container");
     modalContainer.classList.add("is-visible");
 
+
     // clear Modal content
     modalContainer.innerHTML = "";
+
 
     // Create modal
     let modal = document.createElement("div");
     modal.classList.add("modal");
     modalContainer.appendChild(modal);
 
+
     //create modal header background
     let header = document.createElement("div");
     header.setAttribute("id", "modal-header-background");
     modal.appendChild(header);
+
 
     //create modal headline
     let h2 = document.createElement("h2");
     h2.classList.add("modal-headline");
     h2.innerText = "#" + pokemonID + " " + capitalizeFirstLetter(pokemonName);
     modal.appendChild(h2);
+
 
     //create modal closing section
     let modalClose = document.createElement("div");
@@ -177,11 +170,13 @@ let pokemonRepository = (function () {
     button.innerText = "close";
     modalClose.appendChild(button);
 
+
     //create modal image section
     let img = document.createElement("img");
     img.classList.add("modal-image");
     img.setAttribute("src", pokemonPicture);
     modal.appendChild(img);
+
 
     //create modal details section as html table
     let modalDetails = document.createElement("div");
@@ -222,21 +217,25 @@ let pokemonRepository = (function () {
     });
   }
 
+
   function hideModal() {
     let modal = document.querySelector("#modal-container");
     modal.classList.remove("is-visible");
     modal.parentElement.appendChild(modal);
   }
 
+
   function getIndexOfPokemon(pokemon) {
     let index = pokemonList.indexOf(pokemon) + 1;
     return "#" + index
   }
 
+
   /* fucntion to get the whole pokemonRepository, returns an Array */
   function getAll() {
     return pokemonList
   }
+
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
@@ -244,12 +243,14 @@ let pokemonRepository = (function () {
     }
   });
 
+
   modalContainer.addEventListener("click", (e) => {
     let target = e.target;
     if (target === modalContainer) {
       hideModal();
     }
   });
+
 
   searchInput.addEventListener("input", function () {
     let allPokemon = document.querySelectorAll(".pokemon");
@@ -264,15 +265,20 @@ let pokemonRepository = (function () {
     })
   })
 
+
   return {
     add: add,
     getAll: getAll,
+    isInRepository: isInRepository,
     addListItem: addListItem,
     loadPokemonList: loadPokemonList,
     loadDetails: loadDetails,
+    showModal: showModal,
     showDetails: showDetails
   }
 })();
+
+
 
 
 /* Fetches and displays Pokemon data */
@@ -283,5 +289,6 @@ let displayPokemon = function () {
     console.log(e)
   });
 };
+
 
 displayPokemon();
