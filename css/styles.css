@@ -106,9 +106,8 @@ a {
 }
 
 a:hover,
-a:focus, {
+a:focus {
   text-decoration: none;
-
   /* reduces the opacity of the anchor to 40% */
   opacity: 0.4;
 }
