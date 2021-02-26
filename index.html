@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Pokédex</title>
-  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;800;900&family=Space+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>My Pokédex</title>
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;800;900&family=Space+Mono&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-	<body>
 
-		<!--This is where modal window is created-->
-		<div id="modal-container"></div>
+<body>
 
-    <!--This is where the head with a logo and navigation is-->
-  		<header>
-  			<div class="header-elements">
-					<p class="header-logo">Pokédex</p>
-  			<nav>
-  				<ul class="navigation-list">
-  					<li class="navigation-list__item">
-  						<a href="index.html">Home</a>
-  					</li>
-  				</ul>
-  			</nav>
-  			</div>
-  		</header>
+	<!--This is where modal window is created-->
+	<div id="modal-container"></div>
 
-    <!--This is where the main content with a grid of pokemon is-->
-  		<main>
-        <div class="pokemon-grid">
+	<!--This is where the head with a logo and navigation is-->
+	<header>
+		<div class="header-elements">
+			<p class="header-logo">Pokédex</p>
+			<div class="search-bar">
+				<label for="searchbar">Search: </label>
+			<input type="search" id="search" name="searchbar">
+			</div>
+			
+			<!-- <nav>
+				<ul class="navigation-list">
+					<li class="navigation-list__item">
+						<a href="index.html">Home</a>
+					</li>
+				</ul>
+			</nav> -->
+		</div>
+	</header>
+
+	<!--This is where the main content with a grid of pokemon is-->
+	<main>
+		<div class="pokemon-grid">
 			<script src="js/promise-polyfill.js"></script>
 			<script src="js/fetch.umd.js"></script>
-        	<script src="js/scripts.js"></script> 
-        </div>
-  		</main>
+			<script src="js/scripts.js"></script>
+		</div>
+	</main>
 
-	</body>
+</body>
+
 </html>

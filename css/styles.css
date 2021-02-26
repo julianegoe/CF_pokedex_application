@@ -241,6 +241,15 @@ a:active {
   width: 33%;
 }
 
+.search-bar {
+  padding: 10px;
+}
+
+#search {
+  border-radius: 3px;
+  border: none;
+}
+
 @supports (display: grid) {
 
   /* Defines grid area of main content*/

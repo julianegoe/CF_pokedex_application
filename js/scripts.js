@@ -2,6 +2,7 @@
  to get the whole repository, add Pokemon to the array 
  and check wether a Pokemon is part of the repository */
 let pokemonRepository = (function () {
+  let searchInput = document.querySelector("#search");
   let pokemonList = [];
   let modalContainer = document.querySelector('#modal-container');
 
@@ -24,7 +25,7 @@ let pokemonRepository = (function () {
   function addListItem(pokemon) {
     let pokemonGrid = document.querySelector(".pokemon-grid"); // queries pokemon-grid class
     let button = document.createElement("button"); // creates new button
-    button.setAttribute("class", "pokemon-grid__item"); // sets class pokemon-grid_item to button
+    button.classList.add("pokemon-grid__item", "pokemon"); // sets class pokemon-grid_item to button
     pokemonGrid.appendChild(button); // appends button to parent element pokemon-grid
     button.innerText = `${getIndexOfPokemon(pokemon)} ${capitalizeFirstLetter(pokemon.name)}`; //adds information from passed object and additional text to pokemon-grid_item
     button.addEventListener('click', (event) => {
@@ -214,6 +215,19 @@ let pokemonRepository = (function () {
       hideModal();
     }
   });
+
+  searchInput.addEventListener("input", function (event) {
+    let allPokemon = document.querySelectorAll('.pokemon');
+    let filterValue = searchInput.value.toUpperCase();
+    allPokemon.forEach(function (item) {
+      console.log(item.innerText);
+      if (item.innerText.toUpperCase().indexOf(filterValue) > -1) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    })
+  })
 
   return {
     add: add,
