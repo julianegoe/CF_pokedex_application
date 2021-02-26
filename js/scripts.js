@@ -2,6 +2,7 @@
  to get the whole repository, add Pokemon to the array 
  and check wether a Pokemon is part of the repository */
 let pokemonRepository = (function () {
+  let searchInput = document.querySelector(".search");
   let pokemonList = [];
 
   /* function to add Pokemon to the pokemonRepository */
@@ -25,7 +26,7 @@ let pokemonRepository = (function () {
     divRow.addClass("row", "d-flex", "my-5");
     let divCol = $('<div class="col-12 col-md-4 col-lg-3 text-center list-group"></div>'); // creates new button
     divRow.append(divCol); // appends button to parent element pokemon-grid
-    let button = $('<button class= "btn btn-lg btn-light list-group-item my-2"></button>').append(`${getIndexOfPokemon(pokemon)} ${capitalizeFirstLetter(pokemon.name)}`); //adds information from passed object and additional text to pokemon-grid_item
+    let button = $('<button class= "pokemon btn btn-lg btn-light list-group-item my-2"></button>').append(`${getIndexOfPokemon(pokemon)} ${capitalizeFirstLetter(pokemon.name)}`); //adds information from passed object and additional text to pokemon-grid_item
     button.attr("type", "button");
     button.attr("data-toggle", "modal");
     button.attr("data-target", "#detailsModal");
@@ -137,6 +138,20 @@ let pokemonRepository = (function () {
   function getAll() {
     return pokemonList
   };
+
+  searchInput.addEventListener('input', function(){
+    let allPokemon = document.querySelectorAll('.pokemon');
+    let filterValue = searchInput.value.toUpperCase();
+    
+    allPokemon.forEach(function(item){
+        console.log(item.innerText);
+        if(item.innerText.toUpperCase().indexOf(filterValue) > -1){
+            item.style.display = '';
+        }else{
+            item.style.display = 'none';
+        }
+    })
+});
 
   return {
     add: add,
