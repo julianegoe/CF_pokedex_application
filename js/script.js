@@ -23,11 +23,11 @@ let pokemonRepository = (function () {
 
   // function that takes an object and appends it to pokemon list in the Frotend
   function addListItem(pokemon) {
-    let pokemonGrid = document.querySelector(".pokemon-grid"); // queries pokemon-grid class
-    let button = document.createElement("button"); // creates new button
-    button.classList.add("pokemon-grid__item", "pokemon"); // sets class pokemon-grid_item to button
-    pokemonGrid.appendChild(button); // appends button to parent element pokemon-grid
-    button.innerText = `${getIndexOfPokemon(pokemon)} ${capitalizeFirstLetter(pokemon.name)}`; //adds information from passed object and additional text to pokemon-grid_item
+    let pokemonGrid = document.querySelector(".pokemon-grid"); 
+    let button = document.createElement("button"); 
+    button.classList.add("pokemon-grid__item", "pokemon"); 
+    pokemonGrid.appendChild(button); 
+    button.innerText = `${getIndexOfPokemon(pokemon)} ${capitalizeFirstLetter(pokemon.name)}`; 
     button.addEventListener("click", () => {
       showDetails(pokemon)
     })
@@ -54,17 +54,14 @@ let pokemonRepository = (function () {
   }
 
   /* Loads Details of Pokemon asynchronously and returns Image URL and types */
-  function loadDetails(object) {
-    showLoadingMessage();
+  function loadDetails(object) { 
     let url = object.detailsUrl;
     return fetch(url).then(function (response) {
       return response.json();
     }).then(function (json) {
-      hideLoadingMessage()
-      let details = [json.sprites.front_default, json.types, json.id, json.height, json.weight]; //string of sprite png and Array of types
+      let details = [json.sprites.front_default, json.types, json.id, json.height, json.weight]; 
       return details
     }).catch(function (e) {
-      hideLoadingMessage()
       console.log(e)
     })
   }
@@ -84,6 +81,7 @@ let pokemonRepository = (function () {
     div.innerText = "Fetching Pokemon data...";
     pokemonGrid.appendChild(div)
   }
+
   /* Hides a message defined in showLoadingMessage to be used when something is done loading */
   function hideLoadingMessage() {
     let div = document.querySelector("div.pokemon-grid__item")
@@ -95,7 +93,7 @@ let pokemonRepository = (function () {
   returns a Boolean */
   function isInRepository(pokemon) {
     let filteredList = pokemonList.filter(function (item) {
-      filteredList.forEach(x => console.log(`${x.name}`)) //formated for readability in console
+      filteredList.forEach(x => console.log(`${x.name}`)) 
       return item.name === pokemon
     });
   }
@@ -105,6 +103,20 @@ let pokemonRepository = (function () {
     let capitalizedName = pokemonName[0].toUpperCase() + pokemonName.slice(1);
     return capitalizedName
   }
+
+/*   function showLoadingSpinner(modal) {
+    let modalDiv = document.querySelector(modal);
+    let loadingImage = document.createElement("div");
+    loadingImage.classList.add("loadingio-spinner-spinner-ueaohdydy1s", "modal-image");
+    loadingImage.innerHTML = "<div class='ldio-6ysbtzk6qml'><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>"
+    modalDiv.appendChild(loadingImage);
+  }
+
+  function hideLoadingSpinner () {
+    let spinner = document.querySelector(".loadingio-spinner-spinner-ueaohdydy1s");
+    console.log(spinner);
+    spinner.parentElement.removeChild(spinner)
+  } */
 
   function showModal(pokemonID, pokemonName, pokemonTypes, pokemonPicture, pokemonHeight, pokemonWeight) {
 
@@ -208,8 +220,6 @@ let pokemonRepository = (function () {
   });
 
   modalContainer.addEventListener("click", (e) => {
-    // Since this is also triggered when clicking INSIDE the modal
-    // We only want to close if the user clicks directly on the overlay
     let target = e.target;
     if (target === modalContainer) {
       hideModal();

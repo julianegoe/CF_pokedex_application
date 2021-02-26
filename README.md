@@ -1,5 +1,6 @@
 # CF_pokedex_application
 
+<<<<<<< Updated upstream
 # Tech Stack
 HTML  
 CSS  
