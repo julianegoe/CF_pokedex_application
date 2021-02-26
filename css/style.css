@@ -1,4 +1,3 @@
-
 /* Variables with colors and font-sizes to be used in this project */
 :root {
   --primary-color-pink: #a84e70;
@@ -22,7 +21,7 @@
 }
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: var(--front-weight-400);
   line-height: 1.6;
   font-size: var(--font-size-m);
@@ -77,7 +76,6 @@ button:focus {
   font-size: var(--font-size-s);
   font-weight: var(--front-weight-800);
   background-color: var(--tertiary-color-lightgrey);
-
 }
 
 #button-close:hover,
@@ -133,10 +131,10 @@ a:active {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   /* to show it above other content */
-  z-index: 999; 
-    
+  z-index: 999;
+
   /* to allow scrolling if the screen is not high enough*/
-  overflow: auto; 
+  overflow: auto;
 
   /* this is used to center the modal */
   display: grid;
@@ -162,25 +160,22 @@ a:active {
 
   touch-action: pan-x;
 }
- 
-#modal-header-background {
 
+#modal-header-background {
   /* defines a background div that defines a header */
   grid-column: 1 / span 2;
   grid-row: 1 / 2;
   background-color: var(--tertiary-color-lightgrey);
 }
 
-.modal-headline{
-
+.modal-headline {
   /* defines headline section in modal grid */
   grid-column: 1 / 2;
   grid-row: 1 / 2;
   padding: 20px;
 }
 
-.modal-close{
-
+.modal-close {
   /* defines closing section in modal grid */
   grid-column: 2 / span 1;
   grid-row: 1 / 2;
@@ -189,7 +184,6 @@ a:active {
 }
 
 .modal-image {
-
   /* defines image section in modal grid */
   grid-column: 1 / 2;
   grid-row: 2 / 3;
@@ -197,11 +191,9 @@ a:active {
   height: auto;
   padding: 20px;
   width: 100%;
-  
 }
 
 .modal-details {
-
   /* defines details section in modal grid */
   grid-column: 2 / 3;
   grid-row: 2 / 3;
@@ -223,7 +215,6 @@ a:active {
 }
 
 .header-elements {
-
   /* defines layout of header elements */
   display: flex;
   justify-content: space-between;
@@ -251,7 +242,6 @@ a:active {
 }
 
 @supports (display: grid) {
-
   /* Defines grid area of main content*/
   .pokemon-grid {
     display: grid;
@@ -276,9 +266,9 @@ a:active {
     margin: 50px;
   }
 
-.search-bar {
-  text-align: right;
-}
+  .search-bar {
+    text-align: right;
+  }
 
   #search {
     width: 50%;
@@ -302,37 +292,35 @@ a:active {
     grid-template-rows: auto 1fr;
     grid-gap: 10px;
   }
-  
-  .modal-headline{
+
+  .modal-headline {
     grid-column: 1;
     grid-row: 1 / 2;
   }
-  
-  .modal-close{
+
+  .modal-close {
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
     padding: 0px;
   }
-  
+
   .modal-image {
     grid-column: 1;
     grid-row: 2 / 3;
-    
   }
-  
+
   .modal-details {
     grid-column: 1;
     grid-row: 3 / span 1;
     padding: 30px;
   }
-  
+
   #button.close {
     padding-right: 10px;
   }
 }
 
 @media all and (min-width: 600px) and (max-width: 800px) {
-  
   .pokemon-grid {
     grid-template-columns: 1fr 1fr;
     grid-gap: 15px;

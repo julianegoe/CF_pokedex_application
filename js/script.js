@@ -4,7 +4,7 @@
 let pokemonRepository = (function () {
   let searchInput = document.querySelector("#search");
   let pokemonList = [];
-  let modalContainer = document.querySelector('#modal-container');
+  let modalContainer = document.querySelector("#modal-container");
 
   /* function to add Pokemon to the pokemonRepository */
   function add(newPokemon) {
@@ -19,7 +19,7 @@ let pokemonRepository = (function () {
     } else {
       console.error("This is not a valid Pokemon object")
     }
-  };
+  }
 
   // function that takes an object and appends it to pokemon list in the Frotend
   function addListItem(pokemon) {
@@ -28,10 +28,10 @@ let pokemonRepository = (function () {
     button.classList.add("pokemon-grid__item", "pokemon"); // sets class pokemon-grid_item to button
     pokemonGrid.appendChild(button); // appends button to parent element pokemon-grid
     button.innerText = `${getIndexOfPokemon(pokemon)} ${capitalizeFirstLetter(pokemon.name)}`; //adds information from passed object and additional text to pokemon-grid_item
-    button.addEventListener('click', (event) => {
+    button.addEventListener("click", () => {
       showDetails(pokemon)
     })
-  };
+  }
 
   /* Loads Kanto Pokemon asynchronously */
   function loadPokemonList() {
@@ -51,7 +51,7 @@ let pokemonRepository = (function () {
       hideLoadingMessage()
       console.log(e);
     })
-  };
+  }
 
   /* Loads Details of Pokemon asynchronously and returns Image URL and types */
   function loadDetails(object) {
@@ -98,7 +98,7 @@ let pokemonRepository = (function () {
       filteredList.forEach(x => console.log(`${x.name}`)) //formated for readability in console
       return item.name === pokemon
     });
-  };
+  }
 
   /* Capitalizes the first letter of a Pokemon name */
   function capitalizeFirstLetter(pokemonName) {
@@ -180,7 +180,7 @@ let pokemonRepository = (function () {
     let tdWeight = document.createElement("td");
     tdWeight.innerHTML = `${pokemonWeight} kg`;
     trWeight.appendChild(tdWeight);
-    button.addEventListener('click', (event) => {
+    button.addEventListener("click", () => {
       hideModal()
     });
   }
@@ -199,15 +199,15 @@ let pokemonRepository = (function () {
   /* fucntion to get the whole pokemonRepository, returns an Array */
   function getAll() {
     return pokemonList
-  };
+  }
 
-  window.addEventListener('keydown', (e) => {
+  window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
       hideModal();
     }
   });
 
-  modalContainer.addEventListener('click', (e) => {
+  modalContainer.addEventListener("click", (e) => {
     // Since this is also triggered when clicking INSIDE the modal
     // We only want to close if the user clicks directly on the overlay
     let target = e.target;
@@ -216,15 +216,15 @@ let pokemonRepository = (function () {
     }
   });
 
-  searchInput.addEventListener("input", function (event) {
-    let allPokemon = document.querySelectorAll('.pokemon');
+  searchInput.addEventListener("input", function () {
+    let allPokemon = document.querySelectorAll(".pokemon");
     let filterValue = searchInput.value.toUpperCase();
     allPokemon.forEach(function (item) {
       console.log(item.innerText);
       if (item.innerText.toUpperCase().indexOf(filterValue) > -1) {
-        item.style.display = '';
+        item.style.display = "";
       } else {
-        item.style.display = 'none';
+        item.style.display = "none";
       }
     })
   })
@@ -244,7 +244,7 @@ let pokemonRepository = (function () {
 
 /* Fetches and displays Pokemon data */
 let displayPokemon = function () {
-  pokemonRepository.loadPokemonList().then(function (response) {
+  pokemonRepository.loadPokemonList().then(function () {
     pokemonRepository.getAll().forEach(pokemon => pokemonRepository.addListItem(pokemon));
   }).catch(function (e) {
     console.log(e)
