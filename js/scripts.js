@@ -1,5 +1,5 @@
 /* IIFE that stores the whole Pokémon repository and returns an object with methods
- to get the whole repository, add Pokemon to the array 
+ to get the whole repository, add Pokemon to the array
  and check wether a Pokemon is part of the repository */
 let pokemonRepository = (function () {
   let searchInput = document.querySelector(".search");
@@ -13,12 +13,12 @@ let pokemonRepository = (function () {
         pokeKeys[1] === "detailsUrl") {
         pokemonList.push(newPokemon);
       } else {
-        console.error("Please enter valid Pokemon object")
+        console.error("Please enter valid Pokemon object");
       }
     } else {
-      console.error("This is not a valid Pokemon object")
+      console.error("This is not a valid Pokemon object");
     }
-  };
+  }
 
   // function that takes an object and appends it to pokemon list in the Frotend
   function addListItem(pokemon) {
@@ -31,7 +31,6 @@ let pokemonRepository = (function () {
     button.attr("data-toggle", "modal");
     button.attr("data-target", "#detailsModal");
     divCol.append(button);
-    
     // Click event on Button
     button.click(e => {
       showDetails(pokemon)
@@ -139,19 +138,18 @@ let pokemonRepository = (function () {
     return pokemonList
   };
 
-  searchInput.addEventListener('input', function(){
+  searchInput.addEventListener('input', function () {
     let allPokemon = document.querySelectorAll('.pokemon');
     let filterValue = searchInput.value.toUpperCase();
-    
-    allPokemon.forEach(function(item){
-        console.log(item.innerText);
-        if(item.innerText.toUpperCase().indexOf(filterValue) > -1){
-            item.style.display = '';
-        }else{
-            item.style.display = 'none';
-        }
+    allPokemon.forEach(function (item) {
+      console.log(item.innerText);
+      if (item.innerText.toUpperCase().indexOf(filterValue) > -1) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
     })
-});
+  });
 
   return {
     add: add,
