@@ -248,6 +248,7 @@ a:active {
 #search {
   border-radius: 3px;
   border: none;
+  height: 100%;
 }
 
 @supports (display: grid) {
@@ -274,6 +275,14 @@ a:active {
 @media all and (max-width: 600px) {
   main {
     margin: 50px;
+  }
+
+.search-bar {
+  text-align: right;
+}
+
+  #search {
+    width: 50%;
   }
 
   .pokemon-grid {
