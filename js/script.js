@@ -55,13 +55,16 @@ let pokemonRepository = (function () {
 
   /* Loads Details of Pokemon asynchronously and returns Image URL and types */
   function loadDetails(object) { 
+    showLoadingSpinner(".box");
     let url = object.detailsUrl;
     return fetch(url).then(function (response) {
+      hideLoadingSpinner()
       return response.json();
     }).then(function (json) {
       let details = [json.sprites.front_default, json.types, json.id, json.height, json.weight]; 
       return details
     }).catch(function (e) {
+      hideLoadingSpinner();
       console.log(e)
     })
   }
@@ -104,19 +107,33 @@ let pokemonRepository = (function () {
     return capitalizedName
   }
 
-/*   function showLoadingSpinner(modal) {
-    let modalDiv = document.querySelector(modal);
-    let loadingImage = document.createElement("div");
-    loadingImage.classList.add("loadingio-spinner-spinner-ueaohdydy1s", "modal-image");
-    loadingImage.innerHTML = "<div class='ldio-6ysbtzk6qml'><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>"
-    modalDiv.appendChild(loadingImage);
+  function showLoadingSpinner(modal) {
+    let parent = document.querySelector(modal);
+    let loadingSpinner = document.createElement("div");
+    loadingSpinner.classList.add("sk-circle");
+    loadingSpinner.innerHTML = `
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+    `
+    console.log(parent);
+    parent.prepend(loadingSpinner);
   }
 
   function hideLoadingSpinner () {
-    let spinner = document.querySelector(".loadingio-spinner-spinner-ueaohdydy1s");
+    let spinner = document.querySelector(".sk-circle");
     console.log(spinner);
     spinner.parentElement.removeChild(spinner)
-  } */
+  }
 
   function showModal(pokemonID, pokemonName, pokemonTypes, pokemonPicture, pokemonHeight, pokemonWeight) {
 
@@ -137,6 +154,12 @@ let pokemonRepository = (function () {
     header.setAttribute("id", "modal-header-background");
     modal.appendChild(header);
 
+     //create modal image section
+     let img = document.createElement("img");
+     img.classList.add("modal-image");
+     img.setAttribute("src", pokemonPicture);
+     modal.appendChild(img);
+
     //create modal headline
     let h2 = document.createElement("h2");
     h2.classList.add("modal-headline");
@@ -151,12 +174,6 @@ let pokemonRepository = (function () {
     button.setAttribute("id", "button-close");
     button.innerText = "close";
     modalClose.appendChild(button);
-
-    //create modal image section
-    let img = document.createElement("img");
-    img.classList.add("modal-image");
-    img.setAttribute("src", pokemonPicture);
-    modal.appendChild(img);
 
     //create modal details section as html table
     let modalDetails = document.createElement("div");
@@ -247,7 +264,8 @@ let pokemonRepository = (function () {
     loadPokemonList: loadPokemonList,
     loadDetails: loadDetails,
     showModal: showModal,
-    showDetails: showDetails
+    showDetails: showDetails,
+    showLoadingSpinner:showLoadingSpinner
   }
 })();
 
@@ -260,5 +278,6 @@ let displayPokemon = function () {
     console.log(e)
   });
 };
+
 
 displayPokemon();
