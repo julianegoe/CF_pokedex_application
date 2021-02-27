@@ -35,11 +35,11 @@ let pokemonRepository = (function () {
 
   /* Loads Kanto Pokemon asynchronously */
   function loadPokemonList() {
-    showLoadingMessage()
+    showLoadingSpinner()
     return fetch("https://pokeapi.co/api/v2/pokemon/?limit=151").then(function (response) {
       return response.json();
     }).then(function (json) {
-      hideLoadingMessage()
+      hideLoadingSpinner()
       return json.results.forEach(function (item) {
         let pokemon = {
           name: item.name,
@@ -48,7 +48,7 @@ let pokemonRepository = (function () {
         add(pokemon)
       });
     }).catch(function (e) {
-      hideLoadingMessage()
+      hideLoadingSpinner()
       console.log(e);
     })
   }
