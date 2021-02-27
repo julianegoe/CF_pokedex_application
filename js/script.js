@@ -38,11 +38,11 @@
 
   /* Loads Kanto Pokemon asynchronously */
   function loadPokemonList() {
-    showLoadingMessage()
+    showLoadingSpinner()
     return fetch("https://pokeapi.co/api/v2/pokemon/?limit=151").then(function (response) {
       return response.json();
     }).then(function (json) {
-      hideLoadingMessage()
+      hideLoadingSpinner()
       return json.results.forEach(function (item) {
         let pokemon = {
           name: item.name,
@@ -51,7 +51,7 @@
         add(pokemon)
       });
     }).catch(function (e) {
-      hideLoadingMessage()
+      hideLoadingSpinner()
       console.log(e);
     })
   }
@@ -59,13 +59,16 @@
 
   /* Loads Details of Pokemon asynchronously and returns Image URL and types */
   function loadDetails(object) { 
+    showLoadingSpinner(".box");
     let url = object.detailsUrl;
     return fetch(url).then(function (response) {
+      hideLoadingSpinner()
       return response.json();
     }).then(function (json) {
       let details = [json.sprites.front_default, json.types, json.id, json.height, json.weight]; 
       return details
     }).catch(function (e) {
+      hideLoadingSpinner();
       console.log(e)
     })
   }
@@ -77,26 +80,6 @@
       showModal(response[2], pokemon.name, response[1], response[0], response[3], response[4]);
     })
   }
-
-
-  /* Displays a message to be used while something is loading asynchronously */
-  function showLoadingMessage() {
-    let pokemonGrid = document.querySelector(".pokemon-grid");
-    let div = document.createElement("div");
-    div.setAttribute("class", "pokemon-grid__item");
-    div.innerText = "Fetching Pokemon data...";
-    pokemonGrid.appendChild(div)
-  }
-
-
-  /* Hides a message defined in showLoadingMessage to be used when something is done loading */
-  function hideLoadingMessage() {
-    let div = document.querySelector("div.pokemon-grid__item")
-    div.parentElement.removeChild(div);
-
-
-  }
-
 
   /* fuction to check wether a certain Pokémon is part of the pokemonRepository
   returns a Boolean */
@@ -114,20 +97,36 @@
     return capitalizedName
   }
 
-
-/*   function showLoadingSpinner(modal) {
-    let modalDiv = document.querySelector(modal);
-    let loadingImage = document.createElement("div");
-    loadingImage.classList.add("loadingio-spinner-spinner-ueaohdydy1s", "modal-image");
-    loadingImage.innerHTML = "<div class='ldio-6ysbtzk6qml'><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>"
-    modalDiv.appendChild(loadingImage);
+  function showLoadingSpinner() {
+    let body = document.querySelector("body");
+    let parent = document.createElement("div");
+    parent.classList.add("box");
+    body.prepend(parent);
+    let loadingSpinner = document.createElement("div");
+    loadingSpinner.classList.add("sk-circle");
+    loadingSpinner.innerHTML = `
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+    `
+    console.log(parent);
+    parent.prepend(loadingSpinner);
   }
 
   function hideLoadingSpinner () {
-    let spinner = document.querySelector(".loadingio-spinner-spinner-ueaohdydy1s");
+    let spinner = document.querySelector(".box");
     console.log(spinner);
     spinner.parentElement.removeChild(spinner)
-  } */
+  }
 
 
   function showModal(pokemonID, pokemonName, pokemonTypes, pokemonPicture, pokemonHeight, pokemonWeight) {
@@ -153,6 +152,11 @@
     header.setAttribute("id", "modal-header-background");
     modal.appendChild(header);
 
+     //create modal image section
+     let img = document.createElement("img");
+     img.classList.add("modal-image");
+     img.setAttribute("src", pokemonPicture);
+     modal.appendChild(img);
 
     //create modal headline
     let h2 = document.createElement("h2");
@@ -169,14 +173,6 @@
     button.setAttribute("id", "button-close");
     button.innerText = "close";
     modalClose.appendChild(button);
-
-
-    //create modal image section
-    let img = document.createElement("img");
-    img.classList.add("modal-image");
-    img.setAttribute("src", pokemonPicture);
-    modal.appendChild(img);
-
 
     //create modal details section as html table
     let modalDetails = document.createElement("div");
@@ -274,7 +270,8 @@
     loadPokemonList: loadPokemonList,
     loadDetails: loadDetails,
     showModal: showModal,
-    showDetails: showDetails
+    showDetails: showDetails,
+    showLoadingSpinner:showLoadingSpinner
   }
 })();
 
