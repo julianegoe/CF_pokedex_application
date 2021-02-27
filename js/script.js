@@ -107,8 +107,11 @@ let pokemonRepository = (function () {
     return capitalizedName
   }
 
-  function showLoadingSpinner(modal) {
-    let parent = document.querySelector(modal);
+  function showLoadingSpinner() {
+    let body = document.querySelector("body");
+    let parent = document.createElement("div");
+    parent.classList.add("box");
+    body.prepend(parent);
     let loadingSpinner = document.createElement("div");
     loadingSpinner.classList.add("sk-circle");
     loadingSpinner.innerHTML = `
@@ -130,7 +133,7 @@ let pokemonRepository = (function () {
   }
 
   function hideLoadingSpinner () {
-    let spinner = document.querySelector(".sk-circle");
+    let spinner = document.querySelector(".box");
     console.log(spinner);
     spinner.parentElement.removeChild(spinner)
   }
