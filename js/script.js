@@ -1,7 +1,7 @@
 /* IIFE that stores the whole Pokémon repository and returns an object with methods
  to get the whole repository, add Pokemon to the array 
  and check wether a Pokemon is part of the repository */
- let pokemonRepository = (function () {
+let pokemonRepository = (function () {
   let searchInput = document.querySelector("#search");
   let pokemonList = [];
   let modalContainer = document.querySelector("#modal-container");
@@ -25,11 +25,11 @@
 
   // function that takes an object and appends it to pokemon list in the Frotend
   function addListItem(pokemon) {
-    let pokemonGrid = document.querySelector(".pokemon-grid"); 
-    let button = document.createElement("button"); 
-    button.classList.add("pokemon-grid__item", "pokemon"); 
-    pokemonGrid.appendChild(button); 
-    button.innerText = `${getIndexOfPokemon(pokemon)} ${capitalizeFirstLetter(pokemon.name)}`; 
+    let pokemonGrid = document.querySelector(".pokemon-grid");
+    let button = document.createElement("button");
+    button.classList.add("pokemon-grid__item", "pokemon");
+    pokemonGrid.appendChild(button);
+    button.innerText = `${getIndexOfPokemon(pokemon)} ${capitalizeFirstLetter(pokemon.name)}`;
     button.addEventListener("click", () => {
       showDetails(pokemon)
     })
@@ -58,17 +58,16 @@
 
 
   /* Loads Details of Pokemon asynchronously and returns Image URL and types */
-  function loadDetails(object) { 
+  function loadDetails(object) {
     showLoadingSpinner(".box");
     let url = object.detailsUrl;
     return fetch(url).then(function (response) {
       hideLoadingSpinner()
-      return response.json();
+      return response.json()
     }).then(function (json) {
-      let details = [json.sprites.front_default, json.types, json.id, json.height, json.weight]; 
+      let details = [json.sprites.front_default, json.types, json.id, json.height, json.weight];
       return details
     }).catch(function (e) {
-      hideLoadingSpinner();
       console.log(e)
     })
   }
@@ -85,7 +84,7 @@
   returns a Boolean */
   function isInRepository(pokemon) {
     let filteredList = pokemonList.filter(function (item) {
-      filteredList.forEach(x => console.log(`${x.name}`)) 
+      filteredList.forEach(x => console.log(`${x.name}`))
       return item.name === pokemon
     });
   }
@@ -118,13 +117,11 @@
     <div class="sk-circle11 sk-child"></div>
     <div class="sk-circle12 sk-child"></div>
     `
-    console.log(parent);
     parent.prepend(loadingSpinner);
   }
 
-  function hideLoadingSpinner () {
+  function hideLoadingSpinner() {
     let spinner = document.querySelector(".box");
-    console.log(spinner);
     spinner.parentElement.removeChild(spinner)
   }
 
@@ -152,11 +149,11 @@
     header.setAttribute("id", "modal-header-background");
     modal.appendChild(header);
 
-     //create modal image section
-     let img = document.createElement("img");
-     img.classList.add("modal-image");
-     img.setAttribute("src", pokemonPicture);
-     modal.appendChild(img);
+    //create modal image section
+    let img = document.createElement("img");
+    img.classList.add("modal-image");
+    img.setAttribute("src", pokemonPicture);
+    modal.appendChild(img);
 
     //create modal headline
     let h2 = document.createElement("h2");
@@ -252,7 +249,6 @@
     let allPokemon = document.querySelectorAll(".pokemon");
     let filterValue = searchInput.value.toUpperCase();
     allPokemon.forEach(function (item) {
-      console.log(item.innerText);
       if (item.innerText.toUpperCase().indexOf(filterValue) > -1) {
         item.style.display = "";
       } else {
@@ -271,7 +267,7 @@
     loadDetails: loadDetails,
     showModal: showModal,
     showDetails: showDetails,
-    showLoadingSpinner:showLoadingSpinner
+    showLoadingSpinner: showLoadingSpinner
   }
 })();
 
