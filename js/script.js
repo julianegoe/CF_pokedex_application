@@ -197,13 +197,13 @@ let pokemonRepository = (function () {
     thHeight.innerHTML = "Height:";
     trHeight.appendChild(thHeight);
     let tdHeight = document.createElement("td");
-    tdHeight.innerHTML = `${pokemonHeight}0 cm`;
+    tdHeight.innerHTML = `${pokemonHeight / 10} m`;
     trHeight.appendChild(tdHeight);
     let thWeight = document.createElement("th");
     thWeight.innerHTML = "Weight:";
     trWeight.appendChild(thWeight);
     let tdWeight = document.createElement("td");
-    tdWeight.innerHTML = `${pokemonWeight} kg`;
+    tdWeight.innerHTML = `${pokemonWeight / 10} kg`;
     trWeight.appendChild(tdWeight);
     button.addEventListener("click", () => {
       hideModal()
