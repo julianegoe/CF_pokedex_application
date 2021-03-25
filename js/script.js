@@ -22,7 +22,6 @@ let pokemonRepository = (function () {
     }
   }
 
-
   // function that takes an object and appends it to pokemon list in the Frotend
   function addListItem(pokemon) {
     let pokemonGrid = document.querySelector(".pokemon-grid");
@@ -255,7 +254,13 @@ let pokemonRepository = (function () {
         item.style.display = "none";
       }
     })
-  })
+  });
+
+  searchInput.addEventListener("input", function () {
+    if (searchInput.value === "Gotta Catch 'em all!") {
+      window.alert("You're a pokemon master trainer")
+    }
+  });
 
 
   return {
