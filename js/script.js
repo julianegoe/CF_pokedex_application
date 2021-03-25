@@ -257,8 +257,19 @@ let pokemonRepository = (function () {
   });
 
   searchInput.addEventListener("input", function () {
-    if (searchInput.value === "Gotta Catch 'em all!") {
-      window.alert("You're a pokemon master trainer")
+    let egg = document.querySelector("#easterEgg");
+    if (egg) {egg.remove()}
+    if (searchInput.value === "Gotta Catch 'Em All!") {
+      let pokemonGrid = document.querySelector(".pokemon-grid");
+      let easterEggContainer = document.createElement("div");
+      easterEggContainer.style.position = "fixed";
+      easterEggContainer.style.top = 0;
+      easterEggContainer.style.left = 200;
+      easterEggContainer.setAttribute("id", "easterEgg");
+      pokemonGrid.appendChild(easterEggContainer);
+      let easterEgg = document.createElement("img");
+      easterEgg.setAttribute("src", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/87.gif")
+      easterEggContainer.appendChild(easterEgg);
     }
   });
 
