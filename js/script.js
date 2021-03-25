@@ -258,7 +258,7 @@ let pokemonRepository = (function () {
 
   searchInput.addEventListener("input", function () {
     let egg = document.querySelector("#easterEgg");
-    if (egg) {egg.remove()};
+    if (egg) {egg.remove()}
     if (searchInput.value === "Gotta Catch 'Em All!") {
       let pokemonGrid = document.querySelector(".pokemon-grid");
       let easterEggContainer = document.createElement("div");
