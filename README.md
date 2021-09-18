@@ -13,7 +13,7 @@ This project is a responsive web application that fetches data asynchronously fr
 - scroll through grid layout of 150 pokemon
 - click any pokemon to open a modal window showing detailed information
 - search for any pokemon using the search bar
-- Easter Egg: Type in
+- Easter Egg: Type in "Gotta Catch 'Em All!" to see a little surprise ;)
 
 # Get it running
 
@@ -24,3 +24,5 @@ This project is a responsive web application that fetches data asynchronously fr
 https://pokeapi.co/
 
 # Live Demo
+
+https://julianegoe.github.io/CF_pokedex_application/
